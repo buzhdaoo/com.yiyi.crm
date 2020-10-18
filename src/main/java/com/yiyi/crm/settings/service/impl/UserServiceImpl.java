@@ -11,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserServiceImpl implements UserService {
-    private UserDao userDao= SqlSessionUtil.getSqlSession ().getMapper (UserDao.class);
 
     @Override
     public User login(String loginAct, String loginPwd, String ip) throws LoginException {
-        Map<String,String>map=new HashMap<String, String>();
+        Map<String,String>map=new HashMap<>();
+        UserDao userDao= SqlSessionUtil.getSqlSession().getMapper(UserDao.class);
         map.put ("loginAct",loginAct);
         map.put ("loginPwd",loginPwd);
         User user =userDao.login(map);
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
         }
         String exprieTime=user.getEditTime ();
         String currentTime= DateTimeUtil.getSysTime ();
-        if (exprieTime.compareTo (currentTime)>0){
+        if (exprieTime.compareTo (currentTime)<0){
             throw new LoginException ("账号已失效");
         }
         String lockState=user.getLockState ();

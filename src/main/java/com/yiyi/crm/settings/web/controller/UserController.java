@@ -5,6 +5,7 @@ import com.yiyi.crm.settings.service.impl.UserServiceImpl;
 import com.yiyi.crm.utils.MD5Util;
 import com.yiyi.crm.utils.PrintJson;
 import com.yiyi.crm.utils.ServiceFactory;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,9 +38,9 @@ public class UserController extends HttpServlet {
         UserService us= (UserService) ServiceFactory.getService (new UserServiceImpl ());
 
         try {
-            User user=us.login(loginAct,loginPwd,ip);
-            request.getSession ().setAttribute ("user",user);
-            PrintJson.printJsonFlag (response,true);
+            User user= us.login(loginAct,loginPwd,ip);
+            request.getSession ().setAttribute("user",user);
+            PrintJson.printJsonFlag(response, true);
         }catch (Exception e){
             e.printStackTrace ();
             String msg=e.getMessage ();

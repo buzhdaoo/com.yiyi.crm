@@ -11,9 +11,8 @@
     </settings>
 <!--设置别名-->
     <typeAliases>
-
         <package name="com.yiyi.crm.settings.domain"/>
-
+        <package name="com.yiyi.crm.workbench.domain"/>
     </typeAliases>
 
     <environments default="development">
@@ -30,10 +29,8 @@
 
 
     <mappers>
-
-        <package name="com.yiyi.crm.settings.dao"/>
-
-
+        <package name="com.yiyi.crm.settings.dao.xml"/>
+        <package name="com.yiyi.crm.workbench.dao.xml"/>
     </mappers>
 </configuration>
 

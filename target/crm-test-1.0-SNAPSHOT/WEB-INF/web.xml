@@ -14,6 +14,7 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+    <!--用户控制器-->
     <servlet>
         <servlet-name>UserController</servlet-name>
         <servlet-class>com.yiyi.crm.settings.web.controller.UserController</servlet-class>
@@ -21,6 +22,15 @@
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/settings/user/login.do</url-pattern>
+    </servlet-mapping>
+    <!--市场活动控制器-->
+    <servlet>
+        <servlet-name>ActivityController</servlet-name>
+        <servlet-class>com.yiyi.crm.workbench.web.controller.ActivityController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ActivityController</servlet-name>
+        <url-pattern>/workbench/activity/login.do</url-pattern>
     </servlet-mapping>
     
 </web-app>

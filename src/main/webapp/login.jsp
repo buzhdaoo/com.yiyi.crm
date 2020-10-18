@@ -11,7 +11,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 	<base href="<%=basePath%>">
 <meta charset="UTF-8">
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 	<script>
 
@@ -40,17 +40,17 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 			$.ajax({
 				url:"settings/user/login.do",
 				data:{
-					loginAct:loginAct,
-					loginPwd:loginPwd
+					"loginAct":loginAct,
+					"loginPwd":loginPwd
 
 				},
 				type:"post",
 				dataType:"json",
-				success:function (data) {
+				success : function (data) {
 					if (data.success){
 						window.location.href="workbench/index.html";
 					}else {
-						$(" #msg ").html(data.msg)
+						$(" #msg ").html(data.msg);
 					}
 
 				}

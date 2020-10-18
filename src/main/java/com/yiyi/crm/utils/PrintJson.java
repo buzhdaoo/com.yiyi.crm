@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PrintJson {
-	
 	//将boolean值解析为json串
 	public static void printJsonFlag(HttpServletResponse response,boolean flag){
 		

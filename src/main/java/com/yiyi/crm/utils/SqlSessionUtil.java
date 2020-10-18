@@ -10,12 +10,11 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class SqlSessionUtil {
 	
-	private SqlSessionUtil(){}
+	public SqlSessionUtil(){}
 	
 	private static SqlSessionFactory factory;
 	
 	static{
-		
 		String resource = "mybatis-config.xml";
 		InputStream inputStream = null;
 		try {
@@ -28,7 +27,7 @@ public class SqlSessionUtil {
 		
 	}
 	
-	private static ThreadLocal<SqlSession> t = new ThreadLocal<SqlSession>();
+	private static ThreadLocal<SqlSession> t = new ThreadLocal<>();
 	
 	public static SqlSession getSqlSession(){
 		
