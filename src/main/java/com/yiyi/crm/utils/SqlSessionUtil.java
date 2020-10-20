@@ -24,10 +24,10 @@ public class SqlSessionUtil {
 		}
 		factory =
 		 new SqlSessionFactoryBuilder().build(inputStream);
-		
+
 	}
 	
-	private static ThreadLocal<SqlSession> t = new ThreadLocal<>();
+	private static ThreadLocal<SqlSession> t = new ThreadLocal<SqlSession>();
 	
 	public static SqlSession getSqlSession(){
 		

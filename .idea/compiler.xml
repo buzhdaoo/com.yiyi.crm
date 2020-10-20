@@ -6,7 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ch06-SSM" />
         <module name="crm-test" />
+        <module name="ch02-mybatis-dao" />
       </profile>
     </annotationProcessing>
   </component>
