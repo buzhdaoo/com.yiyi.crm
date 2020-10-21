@@ -23,18 +23,15 @@ public class LoginFilter implements Filter {
         String path=request.getServletPath ();
         if ("/login.jsp".equals (path) || "/settings/user/login.do".equals (path)){
             chain.doFilter (req,resp);
-            System.out.println ("+++" );
 
         }else {
             HttpSession session=request.getSession ();
             User user= (User) session.getAttribute ("user");
-            System.out.println ("---" );
 
             if (user!=null){
                 chain.doFilter (req,resp);
             }else {
                 response.sendRedirect (request.getContextPath ()+"/login.jsp");
-                System.out.println ("****" );
             }
 
         }

@@ -2,6 +2,7 @@ package com.yiyi.crm.utils;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,10 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yiyi.crm.settings.domain.User;
 
 public class PrintJson {
 	//将boolean值解析为json串
-	public static void printJsonFlag(HttpServletResponse response,boolean flag){
+	public static void printJsonFlag(HttpServletResponse response, boolean flag){
 		
 		Map<String,Boolean> map = new HashMap<String,Boolean>();
 		map.put("success",flag);

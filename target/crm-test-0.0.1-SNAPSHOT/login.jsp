@@ -16,6 +16,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 	<script>
 
 		$(function () {
+			//如果当前窗口不是顶层窗口，把当前窗口设置为顶层窗口
+			if (window.top!=window){
+				window.top.location=window.location;
+			}
 			$("#loginAct").val("");
 			$("#loginAct").focus();
 			$("#submitBtn").click(function () {

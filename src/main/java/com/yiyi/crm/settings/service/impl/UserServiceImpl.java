@@ -7,6 +7,7 @@ import com.yiyi.crm.settings.service.UserService;
 import com.yiyi.crm.utils.DateTimeUtil;
 import com.yiyi.crm.utils.SqlSessionUtil;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserServiceImpl implements UserService {
@@ -33,5 +34,12 @@ private UserDao userDao=SqlSessionUtil.getSqlSession ().getMapper (UserDao.class
             throw new LoginException ("ip地址受限");
         }
         return user;
+    }
+
+    @Override
+    public List<User> getUserList() {
+
+        List<User>uList=userDao.getUserList();
+        return uList ;
     }
 }
