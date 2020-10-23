@@ -23,6 +23,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 	$(function(){
 		//为创建按钮绑定事件，打开添加的模态窗口
 		$("#addBtn").click(function(){
+			$(".time").datetimepicker({
+				minView: "month",
+				language:  'zh-CN',
+				format: 'yyyy-mm-dd',
+				autoclose: true,
+				todayBtn: true,
+				pickerPosition: "bottom-left"
+			});
+
 
 			//$("#createActivityModal").modal("show");
 			$.ajax({
@@ -37,11 +46,45 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 					})
 					$("#create-Owner").html(html);
 
-
+					//取得当前登陆用户的id
+					//在JS中使用el表达式，el表达式一定要套用在字符串中
+					var id="${user.id}";
 					//将当前登陆的用户，设置为下拉框选项
-
+					$("#create-Owner").val(id);
 					$("#createActivityModal").modal("show");
 				}
+			})
+			//为保存按钮绑定事件，执行添加工作
+			$("#saveBtn").click(function () {
+				$.ajax({
+					url:"workbench/activity/save.do",//前面不加/
+					data:{
+						"owner" : $.trim($("#create-owner").val()),
+						"name": $.trim($("#create-name").val()),
+						"startDate": $.trim($("#create-startDate").val()),
+						"endDate": $.trim($("#create-endDate").val()),
+						"cost": $.trim($("#create-cost").val()),
+						"description": $.trim($("#create-description").val())
+					},
+					type:"post",//添加修改删除，使用post
+					dataType:"json",
+					success:function (data) {
+
+						if (data.success){
+							//添加成功后
+							//刷新市场活动信息列表
+							//关闭添加操作的模态窗口
+							//提交表单
+							$("#activityAddForm")[0].reset();
+							$("#createActivityModal").modal("hide");
+
+						}else {
+							alert("添加失败");
+
+						}
+					}
+				})
+
 			})
 
 		})
@@ -67,8 +110,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 					<h4 class="modal-title" id="myModalLabel1">创建市场活动</h4>
 				</div>
 				<div class="modal-body">
+
 				
-					<form class="form-horizontal" role="form">
+					<form  id="activityAddForm" class="form-horizontal" role="form">
 					
 						<div class="form-group">
 							<label for="create-Owner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
@@ -79,18 +123,18 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 							</div>
                             <label for="create-marketActivityName" class="col-sm-2 control-label">名称<span style="font-size: 15px; color: red;">*</span></label>
                             <div class="col-sm-10" style="width: 300px;">
-                                <input type="text" class="form-control" id="create-marketActivityName">
+                                <input type="text" class="form-control" id="create-name">
                             </div>
 						</div>
 						
 						<div class="form-group">
 							<label for="create-startTime" class="col-sm-2 control-label">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-startTime">
+								<input type="text" class="form-control time" id="create-startDate" readonly>
 							</div>
 							<label for="create-endTime" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-endTime">
+								<input type="text" class="form-control time" id="create-endDate"readonly>
 							</div>
 						</div>
                         <div class="form-group">
@@ -103,7 +147,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 						<div class="form-group">
 							<label for="create-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 81%;">
-								<textarea class="form-control" rows="3" id="create-describe"></textarea>
+								<textarea class="form-control" rows="3" id="create-description"></textarea>
 							</div>
 						</div>
 						
@@ -111,8 +155,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 					
 				</div>
 				<div class="modal-footer">
+					<%--
+						data-dismiss="modal:
+							表示关闭模态窗口
+
+					--%>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+					<button type="button" class="btn btn-primary"  id="saveBtn">保存</button>
 				</div>
 			</div>
 		</div>
